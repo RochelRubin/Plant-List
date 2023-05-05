@@ -19,9 +19,9 @@ const HousePlants = () => {
                 method: 'GET',
                 url: 'https://house-plants2.p.rapidapi.com/all',
                 headers: {
-                    'X-RapidAPI-Key': 'a477e0d174msh3d147690621b353p103995jsn603821a059a2',
+                    'X-RapidAPI-Key': 'Do your own key here',
                     'X-RapidAPI-Host': 'house-plants2.p.rapidapi.com'
-                }
+                  }
             };
             const response = await axios.request(options);
 
