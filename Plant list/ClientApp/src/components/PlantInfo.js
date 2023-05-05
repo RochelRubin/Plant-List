@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom'
 const PlantInfo = () => {
     const [plant, setPlant] = useState(null);
     const history = useHistory();
-const id = useParams();
+const {id} = useParams();
 
    
     useEffect(() => {
@@ -18,7 +18,7 @@ const id = useParams();
                 method: 'GET',
                 url: `https://house-plants2.p.rapidapi.com/id/${id}`,
                 headers: {
-                    'X-RapidAPI-Key': 'Do your own key here',
+                    'X-RapidAPI-Key': '2ca4704713msh3b05be2231f1465p1e5b4ejsn1fde519286e8',
                     'X-RapidAPI-Host': 'house-plants2.p.rapidapi.com'
                   }
               };
@@ -41,21 +41,84 @@ const id = useParams();
 
     return (
         <>
-            <h2>{plant.latinName}</h2>
-            <img src={plant.image ? plant.image : 'placeholder.jpg'} />
+            <h2>{plant["Latin name"]}</h2>
+            <img src={plant.Img } />
 
-            <div>
-                <b>Family:</b> {plant.family}
-            </div>
-            <div>
-                <b>Category:</b> {plant.category}
-            </div>
-            <div>
-                <b>Style:</b> {plant.style}
-            </div>
-            <div>
-                <b>Growth:</b> {plant.growth}
-            </div>
+<div>
+  <b>Common name:</b> {plant["Common name"]}
+</div>
+<div>
+  <b>Latin name:</b> {plant["Latin name"]}
+</div>
+<div>
+  <b>Family:</b> {plant["Family"]}
+</div>
+<div>
+  <b>Category:</b> {plant["Categories"]}
+</div>
+<div>
+  <b>Style:</b> {plant["Style"]}
+</div>
+<div>
+  <b>Growth:</b> {plant["Growth"]}
+</div>
+<div>
+  <b>Origin:</b> {plant["Origin"][0]}
+</div>
+<div>
+  <b>Available sizes (Pot):</b> {plant["Available sizes (Pot)"]}
+</div>
+<div>
+  <b>Climate:</b> {plant["Climat"]}
+</div>
+<div>
+  <b>Zone:</b> {plant["Zone"][0]}
+</div>
+<div>
+  <b>Light tolered:</b> {plant["Light tolered"]}
+</div>
+<div>
+  <b>Light ideal:</b> {plant["Light ideal"]}
+</div>
+<div>
+  <b>Watering:</b> {plant["Watering"]}
+</div>
+<div>
+  <b>Disease:</b> {plant["Disease"] || "N/A"}
+</div>
+<div>
+  <b>Insects:</b> {plant["Insects"].join(", ")}
+</div>
+<div>
+  <b>Bearing:</b> {plant["Bearing"]}
+</div>
+<div>
+  <b>Blooming season:</b> {plant["Blooming season"]}
+</div>
+<div>
+  <b>Color of leaf:</b> {plant["Color of leaf"].join(", ")}
+</div>
+<div>
+  <b>Color of blooms:</b> {plant["Color of blooms"]}
+</div>
+<div>
+  <b>Use:</b> {plant["Use"].join(", ")}
+</div>
+<div>
+  <b>Appeal:</b> {plant["Appeal"]}
+</div>
+<div>
+  <b>Pruning:</b> {plant["Pruning"]}
+</div>
+<div>
+  <b>Description:</b> {plant["Description"] || "N/A"}
+</div>
+<div>
+  <b>Availability:</b> {plant["Avaibility"]}
+</div>
+<div>
+</div>
+
 
             <button onClick={handleBackClick}>Back</button>
         </>

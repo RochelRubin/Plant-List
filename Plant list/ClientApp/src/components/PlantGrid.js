@@ -5,13 +5,12 @@ const PlantGrid = ({ plants, filterCategory, searchTerm }) => {
 
     const filteredPlants = plants.filter(plant => {
         // check if plant matches search term
-        const matchesSearch = plant.latinName.toLowerCase().includes(searchTerm.toLowerCase()) || plant.family.toLowerCase().includes(searchTerm.toLowerCase());
-
+        const matchesSearch = searchTerm.trim().length === 0 || plant["Latin name"].toLowerCase()?.includes(searchTerm?.toLowerCase()) || plant?.Family?.toLowerCase()?.includes(searchTerm?.toLowerCase());
         // check if plant matches category filter
-        const matchesCategory = filterCategory === '' || plant.category === filterCategory;
-
+        const matchesCategory = filterCategory === '' || plant?.Categories === filterCategory;
+     
         return matchesSearch && matchesCategory;
-    });
+     });
 
     return (
         <div>
@@ -26,7 +25,7 @@ const PlantGrid = ({ plants, filterCategory, searchTerm }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredPlants.map(plant => (
+                    {filteredPlants.length > 0 && filteredPlants.map(plant => (
                         <PlantItem key={plant.id} plant={plant} />
                     ))}
                 </tbody>

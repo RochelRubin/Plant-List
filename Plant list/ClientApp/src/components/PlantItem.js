@@ -1,25 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PlantInfo from './PlantInfo';
 
 const PlantItem = ({ plant }) => {
 
     return (
-        <div>
-            {plant.map((plant) => (
+        
+          
                 <tr key={plant.id}>
                     <td>
                         <Link to={`/plant/${plant.id}`}>
-                            {plant.latinName}
+                            {plant["Latin name"]}
                         </Link>
                     </td>
-                    <td>{plant.family}</td>
-                    <td>{plant.category}</td>
-                    <td>{plant.style}</td>
-                    <td>{plant.growth}</td>
+                    <td>{plant.Family}</td>
+                    <td>{plant.Categories}</td>
+                    <td>{plant["Other names"]}</td>
+                    <td>{plant.Growth}</td>
                 </tr>
-            ))}
-        </div>
+           
+        
     );
 };
 

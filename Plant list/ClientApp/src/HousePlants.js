@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
-import PlantInfo from "./components/PlantInfo";
 import PlantGrid from "./components/PlantGrid";
-import { Dropdown, FormControl, } from "bootstrap";
 import axios from "axios";
 
 const HousePlants = () => {
     const [plants, setPlants] = useState([]);
-    const [filterCategory, setFilterCategory] = useState('');
-    const [searchTerm, setSearchTerm] = useState("");
-
-
-
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filterCategory, setSelectedCategory] = useState('');
 
     // Fetch data from API when component mounts
     useEffect(() => {
@@ -19,9 +14,9 @@ const HousePlants = () => {
                 method: 'GET',
                 url: 'https://house-plants2.p.rapidapi.com/all',
                 headers: {
-                    'X-RapidAPI-Key': 'Do your own key here',
+                    'X-RapidAPI-Key': '2ca4704713msh3b05be2231f1465p1e5b4ejsn1fde519286e8',
                     'X-RapidAPI-Host': 'house-plants2.p.rapidapi.com'
-                  }
+                }
             };
             const response = await axios.request(options);
 
@@ -31,43 +26,56 @@ const HousePlants = () => {
     }, []);
 
 
-    const handleFilterChange = (event) => {
-        setFilterCategory(event);
-        setSearchTerm("");
+    // Create a list of unique category names
+    const categoryList = [...new Set(plants.map((plant) => plant.Categories))];
+
+    // Function to handle dropdown option selection
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+        setSearchTerm('')
     };
 
     const handleSearchChange = (event) => {
         setSearchTerm(event);
-        setFilterCategory('');
+        setSelectedCategory('');
     };
 
 
     return (
         <div>
             <h1>House Plants</h1>
-            <div>
 
-                <div className="dropdown">
-                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {filterCategory === '' ? 'All Categories' : filterCategory}
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <button className="dropdown-item" type="button" onClick={() => handleFilterChange('')} >  All Categories</button>
-                        <button className="dropdown-item" type="button" onClick={() => handleFilterChange('Indoor')} >  Indoor</button>
-                        <button className="dropdown-item" type="button" onClick={() => handleFilterChange('Outdoor')} >  Outdoor </button>
-                        <button className="dropdown-item" type="button" onClick={() => handleFilterChange('Fruit Trees')} > Fruit Trees</button>
+            <div className="dropdown">
 
 
-                    </div>
+                <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                >
+                    {filterCategory || "All Categories"}
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {categoryList.map((category) => (
+                        <button
+                            className="dropdown-item"
+                            key={category}
+                            onClick={() => handleCategoryChange(category)}
+                        >
+                            {category}
+                        </button>
+                    ))}
                 </div>
+
+
                 <div>
                     <input
-                    size="small"
                         type="text"
                         placeholder="Search by Latin name or Family based"
-                        className="form-control"
+                        className="form-control smaller-search"
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e) => handleSearchChange(e.target.value)}
                     />
                 </div>
             </div>
