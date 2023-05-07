@@ -18,7 +18,7 @@ const {id} = useParams();
                 method: 'GET',
                 url: `https://house-plants2.p.rapidapi.com/id/${id}`,
                 headers: {
-                    'X-RapidAPI-Key': 'insert-your-api-key-here',
+                    'X-RapidAPI-Key': 'insert-your-api-key-here!',
                     'X-RapidAPI-Host': 'house-plants2.p.rapidapi.com'
                   }
               };
